@@ -15,6 +15,8 @@ public class Main {
             menu.runProgram();
 
         //Pun doar un comment
+        // Am alt commentariu
+        //De mai multe linii
     }
 
 }
