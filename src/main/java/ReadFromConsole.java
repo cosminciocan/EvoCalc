@@ -8,6 +8,8 @@ import java.util.Scanner;
  */
 public class ReadFromConsole {
 
+	//Read from console class
+
     public int readNumber() {
         int numberFromConsole = 0;
         boolean ok;
