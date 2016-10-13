@@ -18,6 +18,9 @@ public class Main {
         //Am lucrat altcea
         //Si am adaugat altceva
         //si altceva
+
+        // Am alt commentariu
+        //De mai multe linii
     }
 
 }
