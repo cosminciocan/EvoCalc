@@ -8,8 +8,6 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] arg) {
-        //   Calculator calculator = new Calculator();
-        //   ReadFromConsole readFromConsole = new ReadFromConsole();
         Menu menu = new Menu();
 
             menu.runProgram();
