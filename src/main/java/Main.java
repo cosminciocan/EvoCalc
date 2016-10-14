@@ -15,12 +15,7 @@ public class Main {
             menu.runProgram();
 
         //Pun doar un comment
-        //Am lucrat altcea
-        //Si am adaugat altceva
-        //si altceva
 
-        // Am alt commentariu
-        //De mai multe linii
     }
 
 }
