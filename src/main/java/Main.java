@@ -11,22 +11,6 @@ public class Main {
         Menu menu = new Menu();
 
             menu.runProgram();
-
-
-        //Pun doar un comment
-
-        //Am lucrat altcea
-        //Si am adaugat altceva
-        //si
-
-        //comentariu nouuu!
-
-        // Am alt commentariu
-
-        //dsadsfhsdjfhdjahfjadfhjda
-        //dsacadoncvodnoufaroiuoieuroefnsifcbaseiugrwarufeioscfjse
-
-
     }
 
 }
