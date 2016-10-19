@@ -6,19 +6,7 @@ import org.testng.annotations.Test;
 
 import java.security.Key;
 
-@Test
 public class FirstTestClass {
 
-    @Test
-    public void firstTest(){
-        WebDriver driver = new FirefoxDriver();
-        driver.manage().window().maximize();
-        driver.get("https://emag.ro");
-        driver.findElement(By.id("emg-input-autosuggest")).sendKeys("Ceva aici!");
-        driver.findElement(By.id("emg-input-autosuggest")).sendKeys(Keys.ENTER);
-        driver.quit();
-
-
-    }
 
 }
