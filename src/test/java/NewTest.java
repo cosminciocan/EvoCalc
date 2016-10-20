@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 @Test
 public class NewTest {
 
-    public void testMethod() {
+    public void testMethod() throws InterruptedException {
 
         WebDriver driver = new FirefoxDriver();
         driver.get("https://evoportal.evozon.com");
@@ -23,11 +23,13 @@ public class NewTest {
 //        userInput.sendKeys("danazhr");
 //        passInput.sendKeys("bla bla");
 //        submitBtn.click();
-
-        WebElement libraryLink = driver.findElement(By.linkText("LIBRARY"));
+        driver.manage().window().maximize();
+        WebElement libraryLink = driver.findElement(By.linkText("SEARCH"));
         libraryLink.click();
-        WebElement searchLibrary = driver.findElement(By.id("_evozonlibrary_WAR_EvozonLibraryportlet_toggle_id_directory_book_searchkeywords"));
-        searchLibrary.sendKeys("bla bla bla");
+//        WebElement search = driver.findElement(By.cssSelector("form > input[type='text']"));
+        Thread.sleep(15000);
+        WebElement search = driver.findElement(By.cssSelector(".search-wrapper input[name*='3_keywords']"));
+        search.sendKeys("bla bla bla");
 
         driver.quit();
     }
