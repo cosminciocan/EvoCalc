@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -11,7 +12,21 @@ import org.testng.annotations.Test;
 @Test
 public class NewTest {
 
-    public void testMethod() {
+    public void waitForElementIsVisible(WebElement element) {
+        int contor=0;
+        do {
+            try {
+                Thread.sleep(200);
+                contor+=200;
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        while (!element.isDisplayed() && contor<=15000);
+    }
+
+    public void testMethod() throws InterruptedException {
 
         WebDriver driver = new FirefoxDriver();
         driver.get("https://evoportal.evozon.com");
@@ -23,11 +38,16 @@ public class NewTest {
 //        userInput.sendKeys("danazhr");
 //        passInput.sendKeys("bla bla");
 //        submitBtn.click();
-
-        WebElement libraryLink = driver.findElement(By.linkText("LIBRARY"));
+        driver.manage().window().maximize();
+        WebElement libraryLink = driver.findElement(By.linkText("SEARCH"));
         libraryLink.click();
-        WebElement searchLibrary = driver.findElement(By.id("_evozonlibrary_WAR_EvozonLibraryportlet_toggle_id_directory_book_searchkeywords"));
-        searchLibrary.sendKeys("bla bla bla");
+//        WebElement search = driver.findElement(By.cssSelector("form > input[type='text']"));
+
+        //Thread.sleep(15000);
+
+        WebElement search = driver.findElement(By.cssSelector(".search-wrapper input[name*='3_keywords']"));
+        waitForElementIsVisible(search);
+        search.sendKeys("bla bla bla");
 
         driver.quit();
     }
