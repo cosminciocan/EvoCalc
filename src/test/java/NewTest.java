@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -10,6 +11,20 @@ import org.testng.annotations.Test;
 
 @Test
 public class NewTest {
+
+    public void waitForElementIsVisible(WebElement element) {
+        int contor=0;
+        do {
+            try {
+                Thread.sleep(200);
+                contor+=200;
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        while (!element.isDisplayed() && contor<=15000);
+    }
 
     public void testMethod() throws InterruptedException {
 
@@ -27,8 +42,11 @@ public class NewTest {
         WebElement libraryLink = driver.findElement(By.linkText("SEARCH"));
         libraryLink.click();
 //        WebElement search = driver.findElement(By.cssSelector("form > input[type='text']"));
-        Thread.sleep(15000);
+
+        //Thread.sleep(15000);
+
         WebElement search = driver.findElement(By.cssSelector(".search-wrapper input[name*='3_keywords']"));
+        waitForElementIsVisible(search);
         search.sendKeys("bla bla bla");
 
         driver.quit();
