@@ -12,41 +12,34 @@ import org.testng.annotations.Test;
 @Test
 public class NewTest {
 
-    public void waitForElementIsVisible(WebElement element) {
+    WebDriver driver = new FirefoxDriver();
+
+    public void waitForElementIsVisible(By element) {
         int contor=0;
         do {
             try {
                 Thread.sleep(200);
                 contor+=200;
+                System.out.println("Contor este: "+ contor);
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        while (!element.isDisplayed() && contor<=15000);
+        while (!driver.findElement(element).isDisplayed() && contor<=15000);
     }
 
+    @Test
     public void testMethod() throws InterruptedException {
-
-        WebDriver driver = new FirefoxDriver();
+        By searchInput = By.cssSelector(".search-wrapper input[name*='3_keywords']");
         driver.get("https://evoportal.evozon.com");
-//        WebElement signInBtn = driver.findElement(By.id("sign-in"));
-//        signInBtn.click();
-//        WebElement userInput = driver.findElement((By.className("aui-field-input aui-field-input-text aui-form-validator-error")));
-//        WebElement passInput = driver.findElement((By.id("_58_password")));
-//        WebElement submitBtn = driver.findElement((By.className("aui-button-input aui-button-input-submit")));
-//        userInput.sendKeys("danazhr");
-//        passInput.sendKeys("bla bla");
-//        submitBtn.click();
+
         driver.manage().window().maximize();
-        WebElement libraryLink = driver.findElement(By.linkText("SEARCH"));
-        libraryLink.click();
-//        WebElement search = driver.findElement(By.cssSelector("form > input[type='text']"));
+        WebElement searchLink = driver.findElement(By.linkText("SEARCH"));
+        searchLink.click();
 
-        //Thread.sleep(15000);
-
-        WebElement search = driver.findElement(By.cssSelector(".search-wrapper input[name*='3_keywords']"));
-        waitForElementIsVisible(search);
+        waitForElementIsVisible(searchInput);
+        WebElement search = driver.findElement(searchInput);
         search.sendKeys("bla bla bla");
 
         driver.quit();
