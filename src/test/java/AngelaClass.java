@@ -17,9 +17,10 @@ import java.util.concurrent.TimeUnit;
 public class AngelaClass {
     WebDriver driver = new FirefoxDriver();
     By searchField = By.cssSelector(".search-wrapper [name=_3_keywords]");
+    int defaultTimeoutValue = 5000;
 
-    @Test
-    public void waitForElements(By element) throws InterruptedException {
+
+    public void waitForElements(By element, int timeoutMilliseconds) throws InterruptedException {
         int x = 0;
         boolean found = false;
 
@@ -31,7 +32,7 @@ public class AngelaClass {
                 Thread.sleep(200);
                 x += 200;
             }
-            if (x >= 5000)
+            if (x >= timeoutMilliseconds)
                 Assert.fail("Element '" + element.toString() + "' not found");
 
         }
@@ -44,10 +45,8 @@ public class AngelaClass {
         driver.get("http://evoportal.evozon.com");
         WebElement element = driver.findElement(By.linkText("SEARCH"));
         element.click();
-        waitForElements(By.cssSelector(".cevaClasaCareNuExista"));
-
+        waitForElements(searchField, defaultTimeoutValue);
         driver.findElement(searchField).sendKeys("abcv");
-        Thread.sleep(2000);
         driver.quit();
     }
 }
