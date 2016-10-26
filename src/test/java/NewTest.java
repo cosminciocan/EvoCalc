@@ -1,9 +1,11 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.List;
+
+import static org.openqa.selenium.Keys.ENTER;
 
 /**
  * Created by evozon on 10/19/2016.
@@ -14,19 +16,21 @@ public class NewTest {
 
     WebDriver driver = new FirefoxDriver();
 
-    public void waitForElementIsVisible(By element) {
+    public void waitForElementIsVisible(By element) throws InterruptedException {
+        boolean found = false;
         int contor=0;
-        do {
+        do{
             try {
-                Thread.sleep(200);
-                contor+=200;
-                System.out.println("Contor este: "+ contor);
+                found = driver.findElement(element).isDisplayed();
 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (NoSuchElementException e) {
+                Thread.sleep(200);
+                contor += 200;
             }
+            if (contor >= 15000)
+                Assert.fail("Element '" + element.toString() + "' not found");
         }
-        while (!driver.findElement(element).isDisplayed() && contor<=15000);
+        while(!found);
     }
 
     @Test
@@ -40,7 +44,19 @@ public class NewTest {
 
         waitForElementIsVisible(searchInput);
         WebElement search = driver.findElement(searchInput);
-        search.sendKeys("bla bla bla");
+        search.sendKeys("servicii");
+        search.sendKeys(ENTER);
+
+        List<WebElement> resultsList = driver.findElements(By.cssSelector("span.asset-entry-title"));
+        System.out.println("Lista are " + resultsList.size() + " elemente");
+
+
+        
+//        for (WebElement element: resultsList){
+//            System.out.println("Elementele din lista: " + element);
+//            //Assert.assertTrue(element.getText().contains("kiuuiubuji"));
+//        }
+        //Thread.sleep(5000);
 
         driver.quit();
     }
