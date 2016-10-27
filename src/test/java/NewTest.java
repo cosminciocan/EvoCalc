@@ -2,8 +2,10 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import sun.awt.windows.ThemeReader;
 
 import java.util.List;
+import java.util.Random;
 
 import static org.openqa.selenium.Keys.ENTER;
 
@@ -18,8 +20,8 @@ public class NewTest {
 
     public void waitForElementIsVisible(By element) throws InterruptedException {
         boolean found = false;
-        int contor=0;
-        do{
+        int contor = 0;
+        do {
             try {
                 found = driver.findElement(element).isDisplayed();
 
@@ -30,7 +32,7 @@ public class NewTest {
             if (contor >= 15000)
                 Assert.fail("Element '" + element.toString() + "' not found");
         }
-        while(!found);
+        while (!found);
     }
 
     @Test
@@ -47,18 +49,30 @@ public class NewTest {
         search.sendKeys("servicii");
         search.sendKeys(ENTER);
 
-        List<WebElement> resultsList = driver.findElements(By.cssSelector("span.asset-entry-title"));
+        By searchResults = By.cssSelector("span.asset-entry-title a");
+        waitForElementIsVisible(searchResults);
+        List<WebElement> resultsList = driver.findElements(searchResults);
         System.out.println("Lista are " + resultsList.size() + " elemente");
 
+        WebElement element = resultsList.get(randomInteger(0, resultsList.size()));
+        String text = element.getText();
+        element.click();
 
-        
-//        for (WebElement element: resultsList){
-//            System.out.println("Elementele din lista: " + element);
-//            //Assert.assertTrue(element.getText().contains("kiuuiubuji"));
-//        }
-        //Thread.sleep(5000);
 
         driver.quit();
     }
 
+//    public void verifyPageDisplayed() {
+//        Assert.assertTrue();
+//    }
+
+    public int randomInteger ( int min, int max){
+        Random rand = new Random();
+        // nextInt excludes the top value so we have to add 1 to include the top value
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+
+        return randomNum;
+    }
+
 }
+

@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -20,7 +21,9 @@ public class iRaul {
         WebDriver driver = new FirefoxDriver();
         driver.get("https://evoportal.evozon.com");
         driver.manage().window().maximize();
-    }
+        //driver.findElement(By.cssSelector())
+        }
+
 
     @Test
     public void clickPeSearch() throws InterruptedException {
@@ -30,29 +33,42 @@ public class iRaul {
                 element.click();
             }
         }
-        Thread.sleep(15000);
     }
 
+    public void waitForElements(By element, int timeoutMilliseconds) throws InterruptedException {
+        int x = 0;
+        boolean found = false;
 
-    //driver.findElement(By.cssSelector("#aui_3_4_0_1_140")).click();
+        while (!found) {
+            try {
+                found = driver.findElement(element).isDisplayed();
+
+            } catch (NoSuchElementException e) {
+                Thread.sleep(200);
+                x += 200;
+            }
+            if (x >= timeoutMilliseconds)
+                Assert.fail("Element '" + element.toString() + "' not found");
+
+        }
+
+    }
 
     @Test
-    public boolean waitForElement(WebElement element) {
-        return element.isDisplayed();
+    public void parcurgListaRezultate() throws InterruptedException {
+        By searchField = By.cssSelector(".search-wrapper [name=_3_keywords]");
+        waitForElements(searchField, 5000);
+
+        driver.findElement(By.cssSelector("input[title=Search]")).click();
+        WebElement container = driver.findElement(By.cssSelector("#_3_documentsSearchContainerSearchContainer"));
+        List<WebElement> listaBenefits = container.findElements(By.cssSelector(".asset-entry-title>a"));
+        for (WebElement element : listaBenefits) {
+            if (element.getText().contains("Banca Comerciala Romana")) {
+                element.click();
+            }
+
+        }
     }
-
-     @Test
-      public void parcurgListaRezultate() {
-
-         driver.findElement(By.cssSelector("input[name=_3_keywords]")).sendKeys("benefits");
-         driver.findElement(By.cssSelector("input[title=Search]")).click();
-         WebElement container = driver.findElement(By.cssSelector("#_3_documentsSearchContainerSearchContainer"));
-         List<WebElement> listaBenefits = container.findElements(By.cssSelector(".asset-entry-title>a"));
-         for (WebElement element:listaBenefits) {
-             Assert.assertTrue(element.getText().contains("Banca Comerciala Romana"));
-                    
-         }
-     }
 
 }
 
