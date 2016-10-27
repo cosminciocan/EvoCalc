@@ -50,7 +50,7 @@ public class iRaul {
          List<WebElement> listaBenefits = container.findElements(By.cssSelector(".asset-entry-title>a"));
          for (WebElement element:listaBenefits) {
              Assert.assertTrue(element.getText().contains("Banca Comerciala Romana"));
-                    
+
          }
      }
 
