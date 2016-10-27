@@ -21,7 +21,7 @@ public class AngelaClass {
     By searchField = By.cssSelector(".search-wrapper [name=_3_keywords]");
     int defaultTimeoutValue = 5000;
     By searchButton = By.cssSelector(".search-wrapper [type=image]:not(#search)");
-    List<WebElement> listOfResults = driver.findElements(By.cssSelector(".taglib-search-iterator"));
+    By headerTitle = By.cssSelector(".header-title");
 
     public void waitForElements(By element, int timeoutMilliseconds) throws InterruptedException {
         int x = 0;
@@ -52,12 +52,15 @@ public class AngelaClass {
         driver.findElement(searchField).sendKeys("a");
         waitForElements(searchButton,defaultTimeoutValue);
         driver.findElement(searchButton).click();
-        Thread.sleep(3000);
+        List<WebElement> listOfResults = driver.findElements(By.cssSelector(".asset-entry-title a"));
         int max = listOfResults.size()-1;
         int min = 0;
         Random generator = new Random();
-        //By title = generator.nextInt(max-min
-
+        int x = generator.nextInt((max-min)+1)+min;
+        String articleTitle = listOfResults.get(x).getText();
+        listOfResults.get(x).click();
+        // testul pica din cand in cand 
+        Assert.assertTrue(driver.findElement(headerTitle).getText().contains(articleTitle));
         driver.quit();
     }
 }
