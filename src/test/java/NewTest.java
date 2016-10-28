@@ -58,13 +58,13 @@ public class NewTest {
         String text = element.getText();
         element.click();
 
+        By bodyContent = By.cssSelector("#main-content");
+        waitForElementIsVisible(bodyContent);
+        WebElement bodyOfPage = driver.findElement(bodyContent);
+        Assert.assertTrue(bodyOfPage.getText().contains(text));
 
         driver.quit();
     }
-
-//    public void verifyPageDisplayed() {
-//        Assert.assertTrue();
-//    }
 
     public int randomInteger ( int min, int max){
         Random rand = new Random();
