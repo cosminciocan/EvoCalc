@@ -1,3 +1,5 @@
+package tests;
+
 /**
  * Created by Mihai on 25/10/2016.
  */
