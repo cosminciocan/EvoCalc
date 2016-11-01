@@ -19,6 +19,8 @@ public class AngelaPage extends BasePage {
     By titleList = By.cssSelector(".asset-entry-title a");
     By searchLink = By.linkText("SEARCH");
 
+    By libraryLink = By.linkText("LIBRARY");
+
     public void getHomepage() {
         driver.get("http://evoportal.evozon.com");
     }
@@ -42,7 +44,9 @@ public class AngelaPage extends BasePage {
         waitForElement(headerTitle, defaultTimeoutValue);
         Assert.assertTrue(driver.findElement(headerTitle).getText().contains(articleTitle));
     }
-
+    public void clickLibrary (){
+    driver.findElement(libraryLink).click();
+    }
 
 }
 

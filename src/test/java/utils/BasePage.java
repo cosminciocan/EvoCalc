@@ -51,8 +51,10 @@ public class BasePage extends Driver{
 
     }
 
-    public int randomGenerator(int max,int min){
+    public int randomGenerator(int min,int max){
         Random generator = new Random();
+        System.out.println("This is max" + max);
+        System.out.println("This is min" + min);
         return generator.nextInt((max-min)+1)+min;
     }
 
