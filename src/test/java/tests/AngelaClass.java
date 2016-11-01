@@ -21,18 +21,15 @@ import java.util.concurrent.TimeUnit;
  * Created by cosminciocan on 19/10/16.
  */
 @Test
-public class AngelaClass extends BasePage {
+public class AngelaClass {
 
     AngelaPage angelaPage = new AngelaPage();
 
-
     @Test
     public void newTest() throws InterruptedException {
-        driver.manage().window().maximize();
         angelaPage.getHomepage();
         angelaPage.clickSearch();
         angelaPage.searchForText("a");
         angelaPage.selectRandomElementFromList();
-        driver.quit();
     }
 }

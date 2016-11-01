@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import utils.BasePage;
 
 import java.util.List;
-import java.util.Random;
 
 import static org.openqa.selenium.Keys.ENTER;
 
@@ -27,13 +26,13 @@ public class NewTest extends BasePage {
         WebElement searchLink = driver.findElement(By.linkText("SEARCH"));
         searchLink.click();
 
-        waitForElements(searchInput, 5000);
+        waitForElement(searchInput, 5000);
         WebElement search = driver.findElement(searchInput);
         search.sendKeys("servicii");
         search.sendKeys(ENTER);
 
         By searchResults = By.cssSelector("span.asset-entry-title a");
-        waitForElements(searchResults, 5000);
+        waitForElement(searchResults, 5000);
         List<WebElement> resultsList = driver.findElements(searchResults);
         System.out.println("Lista are " + resultsList.size() + " elemente");
 
@@ -42,11 +41,10 @@ public class NewTest extends BasePage {
         element.click();
 
         By bodyContent = By.cssSelector("#main-content");
-        waitForElements(bodyContent, 5000);
+        waitForElement(bodyContent, 5000);
         WebElement bodyOfPage = driver.findElement(bodyContent);
         Assert.assertTrue(bodyOfPage.getText().contains(text));
 
-        driver.quit();
     }
 
 

@@ -2,6 +2,7 @@ package utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import java.util.Random;
@@ -11,7 +12,23 @@ import java.util.Random;
  */
 public class BasePage extends Driver{
 
-    public void waitForElements(By element, int timeoutMilliseconds) {
+    public static WebDriver driver;
+
+
+    static {
+        startSuite();
+    }
+
+    private static void startSuite() {
+        try {
+            Driver.initWebDriver();
+            driver = Driver.getWebdriver();
+        } catch (Exception e) {
+            System.out.println("Exception when start suite:\n" + e);
+        }
+    }
+
+    public void waitForElement(By element, int timeoutMilliseconds) {
         int x = 0;
         boolean found = false;
 

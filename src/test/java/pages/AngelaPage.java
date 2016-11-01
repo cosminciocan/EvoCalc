@@ -28,9 +28,9 @@ public class AngelaPage extends BasePage {
     }
 
     public void searchForText(String text) {
-        waitForElements(searchField, defaultTimeoutValue);
+        waitForElement(searchField, defaultTimeoutValue);
         driver.findElement(searchField).sendKeys(text);
-        waitForElements(searchButton, defaultTimeoutValue);
+        waitForElement(searchButton, defaultTimeoutValue);
         driver.findElement(searchButton).click();
     }
 
@@ -39,7 +39,7 @@ public class AngelaPage extends BasePage {
         int x = randomGenerator(0, listOfResults.size() - 1);
         String articleTitle = listOfResults.get(x).getText();
         listOfResults.get(x).click();
-        waitForElements(headerTitle, defaultTimeoutValue);
+        waitForElement(headerTitle, defaultTimeoutValue);
         Assert.assertTrue(driver.findElement(headerTitle).getText().contains(articleTitle));
     }
 
