@@ -66,6 +66,7 @@ public class NewTest {
         driver.quit();
     }
 
+
     public int randomInteger ( int min, int max){
         Random rand = new Random();
         // nextInt excludes the top value so we have to add 1 to include the top value
