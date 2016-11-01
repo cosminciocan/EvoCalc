@@ -26,10 +26,16 @@ public class AngelaClass {
     AngelaPage angelaPage = new AngelaPage();
 
     @Test
-    public void newTest() throws InterruptedException {
+    public void newTest() {
         angelaPage.getHomepage();
         angelaPage.clickSearch();
         angelaPage.searchForText("a");
         angelaPage.selectRandomElementFromList();
+    }
+    @Test
+    public void libraryTest(){
+    angelaPage.getHomepage();
+        angelaPage.clickLibrary();
+
     }
 }
