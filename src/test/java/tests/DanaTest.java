@@ -15,7 +15,7 @@ import static org.openqa.selenium.Keys.ENTER;
  */
 
 @Test
-public class NewTest extends BasePage {
+public class DanaTest extends BasePage {
 
 
     @Test
