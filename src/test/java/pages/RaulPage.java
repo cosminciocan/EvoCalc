@@ -37,12 +37,19 @@ public class RaulPage extends BasePage {
         driver.findElement(By.cssSelector("input[title=Search]")).click();
         WebElement container = driver.findElement(By.cssSelector("#_3_documentsSearchContainerSearchContainer"));
         List<WebElement> listaBenefits = container.findElements(By.cssSelector(".asset-entry-title>a"));
-        for (WebElement element : listaBenefits) {
-            if (element.getText().contains("Banca Comerciala Romana")) {
-                element.click();
-            }
 
-        }
+       // for (WebElement element : listaBenefits) {
+         //   if (element.getText().contains("Banca Comerciala Romana")) {
+           //     element.click();
+           // }
+
+        //}
+
+        
+
+
+
     }
+
 
 }
