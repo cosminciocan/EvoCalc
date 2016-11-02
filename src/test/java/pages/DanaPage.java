@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import utils.BasePage;
 import java.util.List;
@@ -50,8 +51,10 @@ public class DanaPage extends BasePage{
     }
 
     public void selectItemsNumberPerPage(){
+        waitForElement(selectItemsPerPage, 5000);
+        Select dropdown = new Select(driver.findElement(selectItemsPerPage));
+        dropdown.selectByValue("10");
 
-       // Select dropdown = new Select(driver.findElement(selectItemsPerPage));
 
     }
 }
