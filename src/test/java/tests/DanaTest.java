@@ -17,16 +17,24 @@ import static org.openqa.selenium.Keys.ENTER;
 @Test
 public class DanaTest extends BasePage {
 
+    DanaPage danaPage = new DanaPage();
+
 
     @Test
     public void testMethod() {
-        DanaPage danaPage = new DanaPage();
-
         danaPage.getHomepage();
         danaPage.clickOnSearchLink();
         danaPage.searchForSomething("servicii");
         danaPage.selectRandomElementFromList();
 
+
+    }
+
+    @Test
+    public void libraryTest(){
+        danaPage.getHomepage();
+        danaPage.clickOnLibraryLink();
+        danaPage.selectItemsNumberPerPage();
     }
 
 
