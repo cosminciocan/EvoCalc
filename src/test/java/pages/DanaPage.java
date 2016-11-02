@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import utils.BasePage;
-
 import java.util.List;
 
 import static org.openqa.selenium.Keys.ENTER;
@@ -17,6 +16,8 @@ public class DanaPage extends BasePage{
     By searchLink = By.linkText("SEARCH");
     By searchResults = By.cssSelector("span.asset-entry-title a");
     By bodyContent = By.cssSelector("#main-content");
+    By libraryLink = By.linkText("LIBRARY");
+    By selectItemsPerPage = By.id("_evozonlibrary_WAR_EvozonLibraryportlet_booksesSearchContainerPageIteratorTop_itemsPerPage");
 
     public void getHomepage() {
         driver.get("http://evoportal.evozon.com");
@@ -36,7 +37,7 @@ public class DanaPage extends BasePage{
         waitForElement(searchResults, 5000);
         List<WebElement> resultsList = driver.findElements(searchResults);
         //System.out.println("Lista are " + resultsList.size() + " elemente");
-        WebElement element = resultsList.get(randomGenerator((resultsList.size()-1), 0));
+        WebElement element = resultsList.get(randomGenerator(0, (resultsList.size()-1)));
         String text = element.getText();
         element.click();
         waitForElement(bodyContent, 5000);
@@ -44,5 +45,13 @@ public class DanaPage extends BasePage{
         Assert.assertTrue(bodyOfPage.getText().contains(text));
     }
 
+    public void clickOnLibraryLink(){
+        driver.findElement(libraryLink).click();
+    }
 
+    public void selectItemsNumberPerPage(){
+
+       // Select dropdown = new Select(driver.findElement(selectItemsPerPage));
+
+    }
 }
