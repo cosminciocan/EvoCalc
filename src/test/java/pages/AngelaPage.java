@@ -22,7 +22,8 @@ public class AngelaPage extends BasePage {
     By searchLink = By.linkText("SEARCH");
 
     By libraryLink = By.linkText("LIBRARY");
-    By itemPerPageDropDown = By.cssSelector(".aui-field-input.aui-field-input-select.aui-field-input-menu");
+    By itemPerPageDropDown = By.cssSelector(".aui-form > .aui-paginator-container .aui-field-input-menu");
+    By articleList = By.cssSelector(".taglib-search-iterator .results-row:not(.lfr-template)");
 
     public void getHomepage() {
         driver.get("http://evoportal.evozon.com");
@@ -48,10 +49,16 @@ public class AngelaPage extends BasePage {
         Assert.assertTrue(driver.findElement(headerTitle).getText().contains(articleTitle));
     }
     public void clickLibrary (){
+    waitForElement(libraryLink,defaultTimeoutValue);
     driver.findElement(libraryLink).click();
     }
     public void selectItemPerPage (){
-        Select as = new Select(driver.findElement(By.cssSelector("")));
+
+
+        Select dropdownValue = new Select(driver.findElement(By.id("_evozonlibrary_WAR_EvozonLibraryportlet_ocerSearchContainerPageIterator_itemsPerPage")));
+        dropdownValue.selectByVisibleText("30");
+        Assert.assertTrue(driver.findElement(articleList).getSize().toString().equals("30"));
     }
+
 }
 
