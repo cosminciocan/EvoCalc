@@ -18,7 +18,9 @@ public class DanaPage extends BasePage{
     By searchResults = By.cssSelector("span.asset-entry-title a");
     By bodyContent = By.cssSelector("#main-content");
     By libraryLink = By.linkText("LIBRARY");
-    By selectItemsPerPage = By.id("_evozonlibrary_WAR_EvozonLibraryportlet_booksesSearchContainerPageIteratorTop_itemsPerPage");
+    By selectItemsPerPage = By.cssSelector("#_evozonlibrary_WAR_EvozonLibraryportlet_ocerSearchContainerPageIterator_itemsPerPage");
+    //By tableContainer = By.cssSelector(".taglib-search-iterator tr");
+
 
     public void getHomepage() {
         driver.get("http://evoportal.evozon.com");
@@ -54,6 +56,8 @@ public class DanaPage extends BasePage{
         waitForElement(selectItemsPerPage, 5000);
         Select dropdown = new Select(driver.findElement(selectItemsPerPage));
         dropdown.selectByValue("10");
+        //waitForElement(tableContainer, 5000);
+        //List<WebElement> tableRows = driver.findElements(tableContainer);
 
 
     }
