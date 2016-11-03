@@ -58,6 +58,19 @@ public class BasePage extends Driver{
         return generator.nextInt((max-min)+1)+min;
     }
 
+    public void  sleep(int secunde) {
+
+     try {
+
+         Thread.sleep(secunde);
+
+     } catch(InterruptedException e) {
+         System.out.println("Fa sa fie bine, ca nu-i ok");
+
+        }
+
+    }
+
 
 
 }

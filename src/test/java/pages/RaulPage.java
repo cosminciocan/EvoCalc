@@ -1,9 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import utils.BasePage;
 
 import java.util.List;
@@ -32,11 +30,19 @@ public class RaulPage extends BasePage {
     public void parcurgListaRezultate() {
         By searchField = By.cssSelector(".search-wrapper [name=_3_keywords]");
         waitForElement(searchField, 5000);
-        driver.findElement(By.cssSelector(".focus [_3_keywords]")).sendKeys("benefits");
-
+        driver.findElement(By.cssSelector(".search-wrapper [name=_3_keywords]")).sendKeys("benefits");
         driver.findElement(By.cssSelector("input[title=Search]")).click();
+
         WebElement container = driver.findElement(By.cssSelector("#_3_documentsSearchContainerSearchContainer"));
         List<WebElement> listaBenefits = container.findElements(By.cssSelector(".asset-entry-title>a"));
+        int valoareaRandom = randomGenerator(0,listaBenefits.size());
+        WebElement randomClick = listaBenefits.get(valoareaRandom);
+        randomClick.click();
+        sleep(5000);
+
+
+
+
 
        // for (WebElement element : listaBenefits) {
          //   if (element.getText().contains("Banca Comerciala Romana")) {
@@ -44,10 +50,6 @@ public class RaulPage extends BasePage {
            // }
 
         //}
-
-        
-
-
 
     }
 
