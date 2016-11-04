@@ -24,6 +24,8 @@ public class AngelaPage extends BasePage {
     By libraryLink = By.linkText("LIBRARY");
     By itemPerPageDropDown = By.cssSelector(".aui-form > .aui-paginator-container .aui-field-input-menu");
     By articleList = By.cssSelector(".taglib-search-iterator .results-row:not(.lfr-template)");
+    By dropdownOptions = By.cssSelector(".aui-form > .aui-paginator-container .aui-field-input-menu [value]");
+    By dropdownValues = By.id("_evozonlibrary_WAR_EvozonLibraryportlet_ocerSearchContainerPageIterator_itemsPerPage");
 
     public void getHomepage() {
         driver.get("http://evoportal.evozon.com");
@@ -54,11 +56,26 @@ public class AngelaPage extends BasePage {
     }
     public void selectItemPerPage (){
 
-
-        Select dropdownValue = new Select(driver.findElement(By.id("_evozonlibrary_WAR_EvozonLibraryportlet_ocerSearchContainerPageIterator_itemsPerPage")));
+        waitForElement(dropdownValues,defaultTimeoutValue);
+        Select dropdownValue = new Select(driver.findElement(dropdownValues));
         dropdownValue.selectByVisibleText("30");
-        Assert.assertTrue(driver.findElement(articleList).getSize().toString().equals("30"));
+        
+        waitForElement(articleList,defaultTimeoutValue);
+        List<WebElement> listOfItems = driver.findElements(articleList);
+        System.out.println("Lista" + listOfItems.size());
+        Assert.assertTrue((listOfItems.size()+"").equals("30"));
+
+        List<WebElement> listDropdownOptions = driver.findElements(dropdownOptions);
+        System.out.println("elemente drowpdown" + listDropdownOptions.size());
+        int x = randomGenerator(0,listDropdownOptions.size() - 1);
+        dropdownValue.selectByIndex(x);
+        waitForElement(articleList,defaultTimeoutValue);
+        System.out.println("Lista" + listOfItems.size());
+        Assert.assertTrue(listOfItems.size()==x);
+
+
     }
+
 
 }
 
