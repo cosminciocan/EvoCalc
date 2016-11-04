@@ -26,8 +26,6 @@ public class DanaTest extends BasePage {
         danaPage.clickOnSearchLink();
         danaPage.searchForSomething("servicii");
         danaPage.selectRandomElementFromList();
-
-
     }
 
     @Test
