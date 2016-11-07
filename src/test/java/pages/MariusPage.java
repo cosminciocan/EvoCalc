@@ -18,7 +18,9 @@ public class MariusPage extends BasePage{
     By searchResults = By.cssSelector("span.asset-entry-title a");
     By bodyContent = By.cssSelector("#main-content");
     By libraryLink = By.linkText("LIBRARY");
-    By selectItemsPerPage = By.id("_evozonlibrary_WAR_EvozonLibraryportlet_booksesSearchContainerPageIteratorTop_itemsPerPage");
+    //By selectItemsPerPage = By.cssSelector("#_evozonlibrary_WAR_EvozonLibraryportlet_booksesSearchContainerPageIteratorTop_itemsPerPage");
+//    By articleTitle = By.cssSelector(".header-title>span");
+
 
     public void getHomepage() {
         driver.get("http://evoportal.evozon.com");
@@ -43,7 +45,10 @@ public class MariusPage extends BasePage{
         element.click();
         waitForElement(bodyContent, 5000);
         WebElement bodyOfPage = driver.findElement(bodyContent);
+        WebElement articleTitle = driver.findElement(By.cssSelector(".header-title>span"));
         Assert.assertTrue(bodyOfPage.getText().contains(text));
+        String title = articleTitle.getText();
+        Assert.assertTrue(text.contains(title));
     }
 
     public void clickOnLibraryLink(){
@@ -51,8 +56,12 @@ public class MariusPage extends BasePage{
     }
 
     public void selectItemsNumberPerPage(){
-        waitForElement(selectItemsPerPage, 5000);
-        Select dropdown = new Select(driver.findElement(selectItemsPerPage));
+        WebElement dropDown = driver.findElement(By.cssSelector("#_evozonlibrary_WAR_EvozonLibraryportlet_booksesSearchContainerPageIteratorTop_itemsPerPage"));
+sleep(3);
+//        By selectItemsPerPage = By.cssSelector("#_evozonlibrary_WAR_EvozonLibraryportlet_booksesSearchContainerPageIteratorTop_itemsPerPage");
+       // waitForElement(dropDown, 5000);
+
+        Select dropdown = new Select(driver.findElement(By.cssSelector("#_evozonlibrary_WAR_EvozonLibraryportlet_booksesSearchContainerPageIteratorTop_itemsPerPage")));
         dropdown.selectByValue("10");
 
 
