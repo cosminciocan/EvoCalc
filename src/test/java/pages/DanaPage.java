@@ -57,14 +57,15 @@ public class DanaPage extends BasePage {
         waitForElement(selectItemsPerPage, 5000);
         List<WebElement> dropdownValues = driver.findElements(selectItemsPerPage);
         WebElement valueFromDropdown = dropdownValues.get(randomGenerator(0, (dropdownValues.size() - 1)));
+        String selectedValue = valueFromDropdown.getText();
         valueFromDropdown.click();
-        String value = valueFromDropdown.getText();
-        //System.out.println("valoarea selectata: " + value);
-        waitForElement(tableContainer, 5000);
+        //System.out.println("\n valoarea selectata: " + selectedValue);
+
+        waitForElement(tableContainer, 6000);
         List<WebElement> tableRows = driver.findElements(tableContainer);
         //System.out.println("lista are: " + tableRows.size());
         String rowsNumber = tableRows.size() + "";
-        Assert.assertEquals(rowsNumber, value);
+        Assert.assertEquals(rowsNumber, selectedValue);
 
     }
 }
