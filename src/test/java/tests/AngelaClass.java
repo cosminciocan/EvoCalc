@@ -36,7 +36,6 @@ public class AngelaClass {
     public void libraryTest(){
     angelaPage.getHomepage();
         angelaPage.clickLibrary();
-        angelaPage.clickLibrary();
         angelaPage.selectItemPerPage();
     }
 }

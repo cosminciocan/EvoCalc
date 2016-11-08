@@ -10,7 +10,7 @@ import java.util.Random;
 /**
  * Created by cosminciocan on 28/10/16.
  */
-public class BasePage extends Driver{
+public class BasePage extends Driver {
 
     public static WebDriver driver;
 
@@ -37,40 +37,43 @@ public class BasePage extends Driver{
                 found = driver.findElement(element).isDisplayed();
 
             } catch (NoSuchElementException e) {
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
+                sleep(200);
                 x += 200;
             }
             if (x >= timeoutMilliseconds)
                 Assert.fail("Element '" + element.toString() + "' not found");
-
         }
-
     }
 
-    public int randomGenerator(int min,int max){
+    public int randomGenerator(int min, int max) {
         Random generator = new Random();
-        System.out.println("This is max" + max);
-        System.out.println("This is min" + min);
-        return generator.nextInt((max-min)+1)+min;
+        return generator.nextInt((max - min) + 1) + min;
     }
 
-    public void  sleep(int secunde) {
-
-     try {
-
-         Thread.sleep(secunde);
-
-     } catch(InterruptedException e) {
-         System.out.println("Fa sa fie bine, ca nu-i ok");
-
+    public void sleep(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            System.err.println("Error: " + e);
         }
 
     }
 
+    public void waitForElementNotPresent(By elementLocator, int timoutMilliseconds) {
+        boolean isDisplayed = true;
+        int x = 0;
+        while (isDisplayed) {
+            try {
+                driver.findElement(elementLocator).isDisplayed();
+                sleep(200);
+                x += 200;
+            } catch (NoSuchElementException e) {
+                isDisplayed = false;
+            }
+            if (x >= timoutMilliseconds)
+                Assert.fail("Timed out waiting for element to disappear!");
+        }
+    }
 
 
 }
