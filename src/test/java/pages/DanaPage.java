@@ -61,7 +61,7 @@ public class DanaPage extends BasePage {
         valueFromDropdown.click();
         //System.out.println("\n valoarea selectata: " + selectedValue);
 
-        waitForElement(tableContainer, 6000);
+        waitForElement(tableContainer, 5000);
         List<WebElement> tableRows = driver.findElements(tableContainer);
         //System.out.println("lista are: " + tableRows.size());
         String rowsNumber = tableRows.size() + "";
