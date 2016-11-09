@@ -36,7 +36,7 @@ public class BasePage extends Driver {
             try {
                 found = driver.findElement(element).isDisplayed();
 
-            } catch (NoSuchElementException e) {
+            } catch (Exception e) {
                 sleep(200);
                 x += 200;
             }
@@ -67,7 +67,7 @@ public class BasePage extends Driver {
                 driver.findElement(elementLocator).isDisplayed();
                 sleep(200);
                 x += 200;
-            } catch (NoSuchElementException e) {
+            } catch (Exception e) {
                 isDisplayed = false;
             }
             if (x >= timoutMilliseconds)

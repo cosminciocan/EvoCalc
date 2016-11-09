@@ -21,6 +21,7 @@ public class DanaPage extends BasePage {
     By libraryLink = By.linkText("LIBRARY");
     By selectItemsPerPage = By.cssSelector("#_evozonlibrary_WAR_EvozonLibraryportlet_ocerSearchContainerPageIterator_itemsPerPage option");
     By tableContainer = By.cssSelector(".results-row:not(.lfr-template)");
+    By loadingSpinner = By.cssSelector(".aui-loadingmask:not(.aui-helper-hidden) .aui-loadingmask-message-content");
 
 
     public void getHomepage() {
@@ -59,11 +60,11 @@ public class DanaPage extends BasePage {
         WebElement valueFromDropdown = dropdownValues.get(randomGenerator(0, (dropdownValues.size() - 1)));
         String selectedValue = valueFromDropdown.getText();
         valueFromDropdown.click();
-        //System.out.println("\n valoarea selectata: " + selectedValue);
+
+        waitForElementNotPresent(loadingSpinner, 5000);
 
         waitForElement(tableContainer, 5000);
         List<WebElement> tableRows = driver.findElements(tableContainer);
-        //System.out.println("lista are: " + tableRows.size());
         String rowsNumber = tableRows.size() + "";
         Assert.assertEquals(rowsNumber, selectedValue);
 
