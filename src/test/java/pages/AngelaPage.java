@@ -58,25 +58,18 @@ public class AngelaPage extends BasePage {
 
     public void selectItemPerPage() {
 
-        waitForElement(dropdownValues, defaultTimeoutValue);
-        Select dropdownValue = new Select(driver.findElement(dropdownValues));
-        dropdownValue.selectByVisibleText("30");
 
-        waitForElementNotPresent(By.cssSelector(".aui-loadingmask:not(.aui-helper-hidden) .aui-loadingmask-message-content"),5000);
-
-        waitForElement(articleList, defaultTimeoutValue);
-        List<WebElement> listOfItems = driver.findElements(articleList);
-        System.out.println("Lista" + listOfItems.size());
-        Assert.assertTrue((listOfItems.size() + "").equals("30"));
-
-
-
+        waitForElement(dropdownOptions, defaultTimeoutValue);
         List<WebElement> listDropdownOptions = driver.findElements(dropdownOptions);
         System.out.println("elemente drowpdown" + listDropdownOptions.size());
         int x = randomGenerator(0, listDropdownOptions.size() - 1);
-        dropdownValue.selectByIndex(x);
+        waitForElement(dropdownValues, defaultTimeoutValue);
+        new Select(driver.findElement(dropdownValues)).selectByIndex(x);
+        waitForElementNotPresent(By.cssSelector(".aui-loadingmask:not(.aui-helper-hidden) .aui-loadingmask-message-content"), 5000);
         waitForElement(articleList, defaultTimeoutValue);
-        System.out.println("Lista" + listOfItems.size());
+        List<WebElement> listOfItems = driver.findElements(articleList);
+        System.out.println("Lista: " + listOfItems.size());
+        System.out.println("This is x: " + x);
         Assert.assertTrue(listOfItems.size() == x);
 
 
