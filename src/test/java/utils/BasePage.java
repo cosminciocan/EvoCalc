@@ -74,6 +74,4 @@ public class BasePage extends Driver {
                 Assert.fail("Timed out waiting for element to disappear!");
         }
     }
-
-
 }
