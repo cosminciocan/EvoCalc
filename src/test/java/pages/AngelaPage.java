@@ -66,11 +66,13 @@ public class AngelaPage extends BasePage {
         waitForElement(dropdownValues, defaultTimeoutValue);
         new Select(driver.findElement(dropdownValues)).selectByIndex(x);
         waitForElementNotPresent(By.cssSelector(".aui-loadingmask:not(.aui-helper-hidden) .aui-loadingmask-message-content"), 5000);
+        waitForElement(dropdownValues, defaultTimeoutValue);
+        String nr = driver.findElement(dropdownValues).getText();
         waitForElement(articleList, defaultTimeoutValue);
         List<WebElement> listOfItems = driver.findElements(articleList);
         System.out.println("Lista: " + listOfItems.size());
-        System.out.println("This is x: " + x);
-        Assert.assertTrue(listOfItems.size() == x);
+        System.out.println("This is nr: " + nr);
+        Assert.assertTrue((listOfItems.size() + "").contains(nr));
 
 
     }

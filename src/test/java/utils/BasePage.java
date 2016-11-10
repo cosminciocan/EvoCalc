@@ -72,6 +72,7 @@ public class BasePage extends Driver {
             }
             if (x >= timoutMilliseconds)
                 Assert.fail("Timed out waiting for element to disappear!");
+
         }
     }
 
