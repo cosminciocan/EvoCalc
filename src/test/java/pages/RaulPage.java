@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import utils.BasePage;
 
 import java.util.List;
@@ -32,17 +33,21 @@ public class RaulPage extends BasePage {
         waitForElement(searchField, 5000);
         driver.findElement(By.cssSelector(".search-wrapper [name=_3_keywords]")).sendKeys("benefits");
         driver.findElement(By.cssSelector("input[title=Search]")).click();
+    }
 
+    public void alegeRezultatRandom() {
         WebElement container = driver.findElement(By.cssSelector("#_3_documentsSearchContainerSearchContainer"));
         List<WebElement> listaBenefits = container.findElements(By.cssSelector(".asset-entry-title>a"));
         int valoareaRandom = randomGenerator(0,listaBenefits.size());
-        WebElement randomClick = listaBenefits.get(valoareaRandom);
-        randomClick.click();
-        sleep(5000);
+         WebElement randomClick = listaBenefits.get(valoareaRandom);
+         String selectedElementText = randomClick.getText();
+         randomClick.click();
+         sleep(5000);
 
 
+             Assert.assertTrue(selectedElementText.contains(selectedElementText));
 
-
+     }
 
        // for (WebElement element : listaBenefits) {
          //   if (element.getText().contains("Banca Comerciala Romana")) {
@@ -51,7 +56,7 @@ public class RaulPage extends BasePage {
 
         //}
 
-    }
+
 
 
 }
