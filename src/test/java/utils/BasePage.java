@@ -75,6 +75,4 @@ public class BasePage extends Driver {
 
         }
     }
-
-
 }
